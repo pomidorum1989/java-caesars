@@ -26,10 +26,10 @@ public class WebDriverFactory {
             String browser = System.getProperty("browser");
             switch (browser) {
                 case "chrome_docker":
-                    createDockerizedBrowser(WebDriverManager.chromedriver().browserInDocker());
+                    createDockerizedBrowser(WebDriverManager.chromedriver());
                     break;
                 case "firefox_docker":
-                    createDockerizedBrowser(WebDriverManager.firefoxdriver().browserInDocker());
+                    createDockerizedBrowser(WebDriverManager.firefoxdriver());
                     break;
                 case "chrome":
                     webDriverManager = WebDriverManager.chromedriver().cachePath("./target/driver/" + Thread.currentThread().threadId());
@@ -83,10 +83,10 @@ public class WebDriverFactory {
     public synchronized static void createDockerizedBrowser(WebDriverManager webDriverManagerInstance) {
         WebDriverManager webDriverManager;
         if (WebDriverManager.isDockerAvailable()) {
-            webDriverManager = webDriverManagerInstance;
+            webDriverManager = webDriverManagerInstance.browserInDocker();
             webDriverManager.dockerDefaultArgs("--disable-gpu,--no-sandbox,--lang=en-US,--disable-gpu,--incognito");
-            WebDriver driver = webDriverManager.create();
-            DRIVER_THREAD_LOCAL.set(driver);
+            DRIVER_THREAD_LOCAL.set(webDriverManager.create());
+            WebDriverContainer.setDriver(DRIVER_THREAD_LOCAL.get());
             log.info("Browser container id: {}, docker server url:{}",
                     webDriverManager.getDockerBrowserContainerId(), webDriverManager.getDockerSeleniumServerUrl());
         } else {
