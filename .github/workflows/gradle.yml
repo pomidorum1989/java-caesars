@@ -37,7 +37,7 @@ jobs:
 
 
       - name: Build and Test with Maven
-        run: mvn -q clean test -Dcucumber.filter.tags="${{ github.event.inputs.suite }}" -Dbrowser=${{ github.event.inputs.browser }}
+        run: mvn -q clean test -Dcucumber.filter.tags="@${{ github.event.inputs.suite }}" -Dbrowser=${{ github.event.inputs.browser }}
 
       - name: Checkout gh-pages
         if: always()
