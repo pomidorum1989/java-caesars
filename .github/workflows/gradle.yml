@@ -1,0 +1,65 @@
+name: Java CI with Maven, Cucumber & Allure Reporting
+
+on:
+  workflow_dispatch:
+    inputs:
+      suite:
+        description: Select the test suite to run
+        required: true
+        default: Smoke
+        type: choice
+        options:
+          - Smoke
+          - API
+      browser:
+        description: Select the browser to run tests
+        required: true
+        default: chrome_docker
+        type: choice
+        options:
+          - chrome_docker
+          - firefox_docker
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions: write-all
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+
+      - name: Build and Test with Maven
+        run: mvn clean test -Dcucumber.filter.tags="${{ github.event.inputs.suite }}.xml" -Dbrowser=${{ github.event.inputs.browser }}
+
+      - name: Checkout gh-pages
+        if: always()
+        uses: actions/checkout@v4.1.7
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Generate Allure Report with History
+        uses: simple-elf/allure-report-action@v1.9
+        if: always()
+        with:
+          gh_pages: gh-pages
+          allure_history: allure-history
+          allure_results: build/allure-results
+          keep_reports: 20
+
+      - name: Deploy Allure Report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        if: always()
+        with:
+          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
