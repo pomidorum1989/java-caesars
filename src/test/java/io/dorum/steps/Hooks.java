@@ -1,10 +1,11 @@
 package io.dorum.steps;
 
-import io.cucumber.java.*;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.dorum.utils.WebDriverContainer;
 import io.dorum.utils.WebDriverFactory;
 import io.qameta.allure.Attachment;
-import io.restassured.RestAssured;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.ThreadContext;

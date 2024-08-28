@@ -72,13 +72,12 @@ public class ApiSteps {
         Assert.assertEquals(actualPost, expectedPost);
     }
 
-    @When("I send a get request to {string} with token {string} with parameter {string} and {string} value")
-    public void i_send_a_get_request_with_auth_to(String url, String token, String parameter, String value) {
+    @When("I send a get request to {string} with header")
+    public void i_send_a_get_request_with_auth_to(String url) {
         threadLocalResponse.set(RestAssured.given()
                 .filter(new AllureRestAssured())
-                .header("Authorization", "Bearer " + token)
-                .header("Accept", "application/json")
-                .queryParam(parameter, value)
+                .header("Content-Type", "application/json")
+                .header("x-AppBranding", "Caesars Palace Online")
                 .when()
                 .get(url));
     }

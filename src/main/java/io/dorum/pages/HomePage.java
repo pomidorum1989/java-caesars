@@ -1,7 +1,6 @@
 package io.dorum.pages;
 
 import io.dorum.utils.WaitUtils;
-import io.dorum.utils.WebDriverContainer;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;

@@ -28,6 +28,10 @@ public class BasePage {
         WebDriverContainer.getDriver().findElement(by).sendKeys(text);
     }
 
+    public boolean isDisplayed(By by) {
+        return WebDriverContainer.getDriver().findElement(by).isDisplayed();
+    }
+
     public void dragAndDrop() {
         WebElement sourceElement = WebDriverContainer.getDriver().findElement(By.id("source"));
         WebElement targetElement = WebDriverContainer.getDriver().findElement(By.id("target"));

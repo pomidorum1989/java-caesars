@@ -3,6 +3,7 @@ package io.dorum.steps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.dorum.pages.HomePage;
+import io.dorum.utils.WaitUtils;
 import org.testng.Assert;
 
 public class HomePageSteps {
@@ -21,6 +22,7 @@ public class HomePageSteps {
     @Then("the title should be {string}")
     public void the_title_should_be(String expectedTitle) {
         String actualTitle = homePage.getPageTitle();
+        WaitUtils.waitForUrlToContain(expectedTitle);
         Assert.assertEquals(actualTitle, expectedTitle);
     }
 }

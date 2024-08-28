@@ -35,7 +35,7 @@ public class WebDriverFactory {
                     webDriverManager = WebDriverManager.chromedriver().cachePath("./target/driver/" + Thread.currentThread().threadId());
                     ChromeOptions chromeOptions = new ChromeOptions();
                     chromeOptions.addArguments("--lang=en-US");
-                    chromeOptions.addArguments("--headless");
+//                    chromeOptions.addArguments("--headless");
                     chromeOptions.addArguments("--disable-gpu");
                     chromeOptions.addArguments("--incognito");
                     DRIVER_THREAD_LOCAL.set(webDriverManager.capabilities(chromeOptions).create());
