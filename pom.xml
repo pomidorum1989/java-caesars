@@ -23,6 +23,7 @@
         <rest.assured.version>5.5.0</rest.assured.version>
         <allure.version>2.29.0</allure.version>
         <aspectj.version>1.9.22.1</aspectj.version>
+        <jackson.version>2.17.2</jackson.version>
     </properties>
 
     <dependencyManagement>
@@ -136,6 +137,14 @@
             <version>${aspectj.version}</version>
             <scope>runtime</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

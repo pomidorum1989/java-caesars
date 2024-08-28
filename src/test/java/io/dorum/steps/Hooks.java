@@ -4,6 +4,7 @@ import io.cucumber.java.*;
 import io.dorum.utils.WebDriverContainer;
 import io.dorum.utils.WebDriverFactory;
 import io.qameta.allure.Attachment;
+import io.restassured.RestAssured;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.ThreadContext;
@@ -22,16 +23,20 @@ public class Hooks {
     public void setUp(Scenario scenario) {
         ThreadContext.put("threadName", String.valueOf(Thread.currentThread().threadId()));
         log.info("Scenario {} is started", scenario.getName());
-        WebDriverFactory.createDriver();
+        if (!scenario.getSourceTagNames().contains("@API")) {
+            WebDriverFactory.createDriver();
+        }
     }
 
     @After
     public void tearDown(Scenario scenario) {
-        if (scenario.isFailed()) {
+        if (scenario.isFailed() && !scenario.getSourceTagNames().contains("@API")) {
             takeScreenShot("failure_" + scenario.getName());
         }
         ThreadContext.clearAll();
-        WebDriverFactory.quitDriver();
+        if (!scenario.getSourceTagNames().contains("@API")) {
+            WebDriverFactory.quitDriver();
+        }
         log.info("Scenario {} is finished", scenario.getName());
     }
 
