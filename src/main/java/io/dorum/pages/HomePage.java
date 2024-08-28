@@ -13,8 +13,7 @@ public class HomePage extends BasePage {
 
     @Step("Open page")
     public void openPage(String url) {
-        WebDriverContainer.getDriver().get(url);
-        WaitUtils.waitForUrlToContain(url);
+        openBrowserPage(url);
         log.info("{} was opened", url);
     }
 
