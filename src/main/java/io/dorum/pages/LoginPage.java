@@ -18,12 +18,12 @@ public class LoginPage extends BasePage {
         click(accountBtn);
     }
 
-    public void fillLoginField() {
-        type(loginInput, "123456");
+    public void fillLoginField(String login) {
+        type(loginInput, login);
     }
 
-    public void fillPasswordFiled() {
-        type(passwordInput, "123456");
+    public void fillPasswordFiled(String password) {
+        type(passwordInput, password);
     }
 
     public void clickLoginBtn() {

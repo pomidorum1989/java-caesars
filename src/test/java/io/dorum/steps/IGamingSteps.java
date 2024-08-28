@@ -7,18 +7,18 @@ import org.testng.Assert;
 
 
 public class IGamingSteps {
-    private LoginPage loginPage = new LoginPage();
+    private final LoginPage loginPage = new LoginPage();
 
     @Given("I open login page")
     public void i_open_login_page() {
         loginPage.openCaesars();
     }
 
-    @Then("I enter incorrect credentials")
-    public void then_and_i_enter_incorrect_credentials() {
+    @Then("I enter incorrect credentials {string} and {string}")
+    public void then_and_i_enter_incorrect_credentials(String login, String password) {
         loginPage.openAccount();
-        loginPage.fillLoginField();
-        loginPage.fillPasswordFiled();
+        loginPage.fillLoginField(login);
+        loginPage.fillPasswordFiled(password);
         loginPage.clickLoginBtn();
     }
 

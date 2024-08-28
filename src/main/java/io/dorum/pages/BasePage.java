@@ -14,6 +14,7 @@ public class BasePage {
     public void openBrowserPage(String url) {
         WebDriverContainer.getDriver().get(url);
         WaitUtils.waitForUrlToContain(url);
+        waitForPageToLoad(10);
     }
 
     public String getPageTitle() {

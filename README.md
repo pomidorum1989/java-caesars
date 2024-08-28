@@ -7,8 +7,8 @@ The framework is designed to help you write readable and maintainable tests for 
 
 ## Project Structure
 
-- **`src/test/java`**: Contains the step definitions and test classes.
-- **`src/test/resources`**: Contains the Cucumber feature files.
+- **`src/test/java/io/dorum/steps`**: Contains the step definitions.
+- **`src/test/resources/features`**: Contains the Cucumber feature files.
 - **`pom.xml`**: Maven configuration file.
 
 ## Prerequisites
